@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ISMRM Raw Data Format (ISMRMRD) &mdash; ISMRMRD 1.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.2.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.2.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="ISMRMRD 1.1.0 documentation" href="#" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+          ISMRMRD</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="api/index.html">API Reference</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="simple">
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">ISMRM Raw Data Format (ISMRMRD)</a><ul>
+<li><a class="reference internal" href="#preamble">Preamble</a></li>
+<li><a class="reference internal" href="#developers-contributors">Developers/Contributors</a></li>
+<li><a class="reference internal" href="#obtaining-and-installing">Obtaining and Installing</a><ul>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#linux-installation">Linux installation</a></li>
+<li><a class="reference internal" href="#mac-osx-installation">Mac OSX Installation</a></li>
+<li><a class="reference internal" href="#windows-installation">Windows Installation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#flexible-data-header">Flexible Data Header</a></li>
+<li><a class="reference internal" href="#fixed-data-structures">Fixed Data structures</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#file-storage">File Storage</a></li>
+<li><a class="reference internal" href="#c-support-library">C++ Support Library</a><ul>
+<li><a class="reference internal" href="#c-example-applications">C++ Example Applications</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#matlab-example-code-and-datasets">Matlab Example Code and Datasets</a></li>
+<li><a class="reference internal" href="#appendix">Appendix</a><ul>
+<li><a class="reference internal" href="#xml-schema-definition">XML Schema Definition</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/index.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="ismrm-raw-data-format-ismrmrd">
+<h1><a class="toc-backref" href="#id1">ISMRM Raw Data Format (ISMRMRD)</a><a class="headerlink" href="#ismrm-raw-data-format-ismrmrd" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#ismrm-raw-data-format-ismrmrd" id="id1">ISMRM Raw Data Format (ISMRMRD)</a><ul>
+<li><a class="reference internal" href="#preamble" id="id2">Preamble</a></li>
+<li><a class="reference internal" href="#developers-contributors" id="id3">Developers/Contributors</a></li>
+<li><a class="reference internal" href="#obtaining-and-installing" id="id4">Obtaining and Installing</a><ul>
+<li><a class="reference internal" href="#dependencies" id="id5">Dependencies</a></li>
+<li><a class="reference internal" href="#linux-installation" id="id6">Linux installation</a></li>
+<li><a class="reference internal" href="#mac-osx-installation" id="id7">Mac OSX Installation</a></li>
+<li><a class="reference internal" href="#windows-installation" id="id8">Windows Installation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#overview" id="id9">Overview</a><ul>
+<li><a class="reference internal" href="#flexible-data-header" id="id10">Flexible Data Header</a></li>
+<li><a class="reference internal" href="#fixed-data-structures" id="id11">Fixed Data structures</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#file-storage" id="id12">File Storage</a></li>
+<li><a class="reference internal" href="#c-support-library" id="id13">C++ Support Library</a><ul>
+<li><a class="reference internal" href="#c-example-applications" id="id14">C++ Example Applications</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#matlab-example-code-and-datasets" id="id15">Matlab Example Code and Datasets</a></li>
+<li><a class="reference internal" href="#appendix" id="id16">Appendix</a><ul>
+<li><a class="reference internal" href="#xml-schema-definition" id="id17">XML Schema Definition</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables" id="id18">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="preamble">
+<h2><a class="toc-backref" href="#id2">Preamble</a><a class="headerlink" href="#preamble" title="Permalink to this headline">¶</a></h2>
+<p>A prerequisite for sharing magnetic resonance (imaging) reconstruction algorithms and code is a common raw data format. This document describes such a common raw data format and attempts to capture the data fields that are require to describe enough details about the magnetic resonance experiment to reconstruct images from the data.
+This standard was developed by a subcommittee of the ISMRM Sedona 2013 workshop. Comments and requests for additions/modifications can be sent to:</p>
+<ul class="simple">
+<li>Michael S. Hansen (michael DOT hansen AT nih DOT gov)</li>
+<li>Wally Block (wblock AT cae DOT wisc DOT edu)</li>
+<li>Mark Griswold (mag46 AT case DOT edu)</li>
+<li>Brian Hargreaves (bah AT stanford DOT edu)</li>
+<li>Peter Boernert (peter DOT boernert AT philips DOT com)</li>
+<li>Sebastian Kozerke (kozerke AT biomed DOT ee DOT ethz DOT ch)</li>
+<li>Craig Meyer (cmeyer AT virginia DOT edu)</li>
+<li>Doug Noll (dnoll AT umich DOT edu)</li>
+<li>Jim Pipe (Jim.Pipe AT DignityHealth DOT org)</li>
+</ul>
+</div>
+<div class="section" id="developers-contributors">
+<h2><a class="toc-backref" href="#id3">Developers/Contributors</a><a class="headerlink" href="#developers-contributors" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Michael S. Hansen, National Institutes of Health, USA</li>
+<li>Nick Zwart, Barrow Neurological Institute, Phoenix, Arizona</li>
+<li>Souheil Inati, National Institutes of Health, USA</li>
+<li>Joe Naegele, National Institutes of Health, USA</li>
+<li>Kaveh Vahedipour, Juelich Research Centre, Juelich, Germany</li>
+</ul>
+</div>
+<div class="section" id="obtaining-and-installing">
+<h2><a class="toc-backref" href="#id4">Obtaining and Installing</a><a class="headerlink" href="#obtaining-and-installing" title="Permalink to this headline">¶</a></h2>
+<p>The source code, examples, and example datasets can be found on the ISMRM Raw Data Github <a class="reference external" href="https://github.com/ismrmrd/ismrmrd">website</a>.</p>
+<p>To download the source code, clone the git archive:</p>
+<div class="highlight-python"><div class="highlight"><pre>git clone https://github.com/ismrmrd/ismrmrd
+</pre></div>
+</div>
+<p>API Documentation can be found at <a class="reference external" href="https://ismrmrd.github.io/ismrmrd/api/">https://ismrmrd.github.io/ismrmrd/api/</a>.</p>
+<div class="section" id="dependencies">
+<h3><a class="toc-backref" href="#id5">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h3>
+<p>The ISMRM Raw Data format is described by an XML <a class="reference internal" href="#schema">schema</a> and some C-style structs with fixed memory layout and as such does not have dependencies. However, it uses HDF5 files for storage and a C++ library for reading and writing the ISMRMRD files is included in this distribution. Furthermore, since the XML header is defined with an XML <a class="reference internal" href="#schema">schema</a>, we encourage using XML data binding when writing software using the format. To compile all components of this distribution you need:</p>
+<ul class="simple">
+<li>HDF5 (version 1.8 or higher) libraries. Available from <a class="reference external" href="http://www.hdfgroup.org/downloads/index.html">http://www.hdfgroup.org/downloads/index.html</a>.</li>
+<li>Boost (<a class="reference external" href="http://www.boost.org/">http://www.boost.org/</a>)</li>
+<li>Cmake build tool (<a class="reference external" href="http://www.cmake.org/">http://www.cmake.org/</a>)</li>
+<li>Doxygen if you would like to generate API documentation (<a class="reference external" href="http://www.doxygen.org">http://www.doxygen.org</a>)</li>
+<li>Git if you would like to use the source code archive (<a class="reference external" href="http://git-scm.com/">http://git-scm.com/</a>)</li>
+<li>FFTW if you would like to compile some of the example applications
+(<a class="reference external" href="http://www.fftw.org">http://www.fftw.org</a>)</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is only necessary to install the dependencies if you wish to develop compiled C/C++ software, which uses the ISMRMRD format. The format can be read in Matlab without installing any additional software.</p>
+</div>
+</div>
+<div class="section" id="linux-installation">
+<h3><a class="toc-backref" href="#id6">Linux installation</a><a class="headerlink" href="#linux-installation" title="Permalink to this headline">¶</a></h3>
+<p>The dependencies mentioned above should be included in most linux distributions. On Ubuntu you can install all required dependencies with:</p>
+<div class="highlight-python"><div class="highlight"><pre>sudo apt-get install libhdf5-serial-dev h5utils cmake cmake-curses-gui libboost-all-dev doxygen git
+</pre></div>
+</div>
+<p>After installation of dependencies, the library can be installed with:</p>
+<div class="code bash highlight-python"><div class="highlight"><pre>git clone https://github.com/ismrmrd/ismrmrd
+cd ismrmrd/
+mkdir build
+cd build
+cmake ../
+make
+sudo make install
+</pre></div>
+</div>
+<p>This will install the library in <tt class="docutils literal"><span class="pre">/usr/local/</span></tt> by default. To specify
+an alternative installation directory, pass <tt class="docutils literal"><span class="pre">-D</span> <span class="pre">CMAKE_INSTALL_PREFIX=&lt;install</span> <span class="pre">dir&gt;</span></tt> to <tt class="docutils literal"><span class="pre">cmake</span></tt>.</p>
+</div>
+<div class="section" id="mac-osx-installation">
+<h3><a class="toc-backref" href="#id7">Mac OSX Installation</a><a class="headerlink" href="#mac-osx-installation" title="Permalink to this headline">¶</a></h3>
+<p>There are numerous different package management systems for Mac. In this example, we have used Homebrew (<a class="reference external" href="http://brew.sh/">http://brew.sh/</a>). First install the dependencies:</p>
+<div class="highlight-python"><div class="highlight"><pre>brew install wget hdf5 boost cmake doxygen fftw
+</pre></div>
+</div>
+<p>Then download and compile:</p>
+<div class="code bash highlight-python"><div class="highlight"><pre>git clone https://github.com/ismrmrd/ismrmrd
+cd ismrmrd
+mkdir build
+cd build/
+cmake ../
+make
+make install
+</pre></div>
+</div>
+<p>This will install the library in <tt class="docutils literal"><span class="pre">/usr/local/</span></tt> by default. To specify
+an alternative installation directory, pass <tt class="docutils literal"><span class="pre">-D</span> <span class="pre">CMAKE_INSTALL_PREFIX=&lt;install</span> <span class="pre">dir&gt;</span></tt> to <tt class="docutils literal"><span class="pre">cmake</span></tt>.</p>
+</div>
+<div class="section" id="windows-installation">
+<h3><a class="toc-backref" href="#id8">Windows Installation</a><a class="headerlink" href="#windows-installation" title="Permalink to this headline">¶</a></h3>
+<p>Setting up a Windows development environment is usually a bit more challenging than working on Unix platforms where most library dependencies are easily installed with package management systems (see above). The general Windows installation instructions (you may have to make adjustments for your setup) is as follows:</p>
+<ul class="simple">
+<li>Starting with a Windows 7 (64-bit) machine with Visual Studio 2010 installed.</li>
+<li>Install CMake (<a class="reference external" href="http://www.cmake.org/files/v2.8/cmake-2.8.9-win32-x86.exe">http://www.cmake.org/files/v2.8/cmake-2.8.9-win32-x86.exe</a>)</li>
+<li>Install Git (<a class="reference external" href="http://msysgit.googlecode.com/files/Git-1.7.11-preview20120710.exe">http://msysgit.googlecode.com/files/Git-1.7.11-preview20120710.exe</a>)</li>
+<li>Install HDF5 (<a class="reference external" href="http://www.hdfgroup.org/ftp/HDF5/current/bin/windows/HDF5189-win64-vs10-shared.zip">http://www.hdfgroup.org/ftp/HDF5/current/bin/windows/HDF5189-win64-vs10-shared.zip</a>)</li>
+<li>Install HDFView (<a class="reference external" href="http://www.hdfgroup.org/ftp/HDF5/hdf-java/hdfview/hdfview_install_win64.exe">http://www.hdfgroup.org/ftp/HDF5/hdf-java/hdfview/hdfview_install_win64.exe</a>)</li>
+<li>Install Boost (<a class="reference external" href="http://boostpro.com/download/x64/boost_1_51_setup.exe">http://boostpro.com/download/x64/boost_1_51_setup.exe</a>)<ul>
+<li>Just install everything for VS2010 and worry about which versions you need later.</li>
+</ul>
+</li>
+<li>Install FFTW (<a class="reference external" href="ftp://ftp.fftw.org/pub/fftw/fftw-3.3.2-dll64.zip">ftp://ftp.fftw.org/pub/fftw/fftw-3.3.2-dll64.zip</a>)<ul>
+<li>You need to create <tt class="docutils literal"><span class="pre">.lib</span></tt> files manually after installing. See instructions at <a class="reference external" href="http://www.fftw.org/install/windows.html">http://www.fftw.org/install/windows.html</a></li>
+</ul>
+</li>
+<li>Make sure the paths to your new libraries are in your PATH environment variable:<ul>
+<li>Boost libraries  (typically <tt class="docutils literal"><span class="pre">C:\Program</span> <span class="pre">Files\boost\boost_1_51\lib</span></tt>)</li>
+<li>FFTW libraries (typically <tt class="docutils literal"><span class="pre">C:\MRILibraries\fftw3</span></tt>)</li>
+<li>HDF5 libraries (typically <tt class="docutils literal"><span class="pre">C:\Program</span> <span class="pre">Files\HDF</span> <span class="pre">Group\HDF5\1.8.9\bin</span></tt>)</li>
+<li>ISMRMRD (typically <tt class="docutils literal"><span class="pre">C:\Program</span> <span class="pre">Files\ismrmrd\bin;C:\Program</span> <span class="pre">Files\ismrmrd\bin</span></tt>)</li>
+</ul>
+</li>
+</ul>
+<p>This can seem a bit daunting, we have included a Windows <a class="reference external" href="https://github.com/ismrmrd/ismrmrd/blob/master/doc/WindowsISMRMRDInstallDependencies.ps1">powershell</a> script, which you can use to guide you through the installation process.</p>
+<p>After installing all dependencies, download the code, e.g. from a git bash shell:</p>
+<div class="code bash highlight-python"><div class="highlight"><pre>git clone https://github.com/ismrmrd/ismrmrd
+cd ismrmrd/
+mkdir build
+cd build/
+cmake-gui.exe
+</pre></div>
+</div>
+<p>Last command will open CMake&#8217;s graphical user interface. Hit the configure button and deal with the dependencies that CMake is unable to find. Hit configure again and repeat the process until CMake has enough information to configure. Once the configuration is complete, you can hit generate to generate a Visual Studio project, which you can open and use to build ISMRMRD. There are step-by-step commands included in the <a class="reference external" href="https://github.com/ismrmrd/ismrmrd/blob/master/doc/WindowsISMRMRDInstallDependencies.ps1">powershell</a> script below to guide you through the CMake configuration and build process from the command line. The command line CMake configuration line (assuming you have installed with the paths above), would look something like (backslashes are just there to break the command over multiple lines):</p>
+<div class="highlight-python"><div class="highlight"><pre>cmake -G&quot;Visual Studio 10 Win64&quot; \
+    -DBOOST_ROOT=C:/Program Files/boost/boost_1_51 \
+    -DFFTW3_INCLUDE_DIR=C:/MRILibraries/fftw3 \
+    -DFFTW3F_LIBRARY=C:/MRILibraries/fftw3/libfftw3f-3.lib ../
+</pre></div>
+</div>
+<p>Again, you may have to adjust for your specific installation paths. After generating the Visual Studio project, you can build from a Visual Studio Command Prompt with:</p>
+<div class="highlight-python"><div class="highlight"><pre>msbuild .\ISMRMRD.sln /p:Configuration=Release
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id9">Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The raw data format combines a mix of flexible data structures (XML header) and fixed structures (equivalent to C-structs). A raw data set consist mainly of 2 sections:</p>
+<ol class="arabic simple">
+<li>A flexible XML format document that can contain an arbitrary number of fields and accommodate everything from simple values (b-values, etc.) to entire vendor protocols, etc. This purpose of this XML document is to provide parameters that may be meaningful for some experiments but not for others. This XML format is defined by an XML Schema Definition file (ismrmrd.xsd).</li>
+<li>Raw data section. This section contains all the acquired data in the experiment. Each data item is preceded by a C-struct with encoding numbers, etc. Following this data header is a channel header and data for each acquired channel. The raw data headers are defined in a C/C++ header file (ismrmrd.h)</li>
+</ol>
+<p>In addition to these sections, the ISMRMRD format also specifies an image header for storing reconstructed images and the accompanying C++ library provides a convenient way of writing such images into HDF5 files along with generic arrays for storing less well defined data structures, e.g. coil sensitivity maps or other calibration data.</p>
+<div class="section" id="flexible-data-header">
+<h3><a class="toc-backref" href="#id10">Flexible Data Header</a><a class="headerlink" href="#flexible-data-header" title="Permalink to this headline">¶</a></h3>
+<p>The flexible data structure is defined by the xml schema definition in <tt class="docutils literal"><span class="pre">schema/ismrmrd.xsd</span></tt> (<a class="reference internal" href="#schema">schema</a> is included in appendix below).</p>
+<p>An example of an XML file for a Cartesian 3D acquisition could look like:</p>
+<div class="highlight-python"><div class="highlight"><pre>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;ismrmrdHeader xmlns=&quot;http://www.ismrm.org/ISMRMRD&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xsi:schemaLocation=&quot;http://www.ismrm.org/ISMRMRD ismrmrd.xsd&quot;&gt;
+  &lt;subjectInformation&gt;
+    &lt;patientName&gt;phantom&lt;/patientName&gt;
+    &lt;patientWeight_kg&gt;70.3068&lt;/patientWeight_kg&gt;
+  &lt;/subjectInformation&gt;
+  &lt;acquisitionSystemInformation&gt;
+    &lt;systemVendor&gt;SIEMENS&lt;/systemVendor&gt;
+    &lt;systemModel&gt;Avanto&lt;/systemModel&gt;
+    &lt;systemFieldStrength_T&gt;1.494&lt;/systemFieldStrength_T&gt;
+    &lt;receiverChannels&gt;32&lt;/receiverChannels&gt;
+    &lt;relativeReceiverNoiseBandwidth&gt;0.79&lt;/relativeReceiverNoiseBandwidth&gt;
+  &lt;/acquisitionSystemInformation&gt;
+  &lt;experimentalConditions&gt;
+    &lt;H1resonanceFrequency_Hz&gt;63642459&lt;/H1resonanceFrequency_Hz&gt;
+  &lt;/experimentalConditions&gt;
+  &lt;encoding&gt;
+    &lt;trajectory&gt;cartesian&lt;/trajectory&gt;
+    &lt;encodedSpace&gt;
+      &lt;matrixSize&gt;
+        &lt;x&gt;256&lt;/x&gt;
+        &lt;y&gt;140&lt;/y&gt;
+        &lt;z&gt;80&lt;/z&gt;
+      &lt;/matrixSize&gt;
+      &lt;fieldOfView_mm&gt;
+        &lt;x&gt;600&lt;/x&gt;
+        &lt;y&gt;328.153125&lt;/y&gt;
+        &lt;z&gt;160&lt;/z&gt;
+      &lt;/fieldOfView_mm&gt;
+    &lt;/encodedSpace&gt;
+    &lt;reconSpace&gt;
+      &lt;matrixSize&gt;
+        &lt;x&gt;128&lt;/x&gt;
+        &lt;y&gt;116&lt;/y&gt;
+        &lt;z&gt;64&lt;/z&gt;
+      &lt;/matrixSize&gt;
+      &lt;fieldOfView_mm&gt;
+        &lt;x&gt;300&lt;/x&gt;
+        &lt;y&gt;271.875&lt;/y&gt;
+        &lt;z&gt;128&lt;/z&gt;
+      &lt;/fieldOfView_mm&gt;
+    &lt;/reconSpace&gt;
+    &lt;encodingLimits&gt;
+      &lt;kspace_encoding_step_1&gt;
+        &lt;minimum&gt;0&lt;/minimum&gt;
+        &lt;maximum&gt;83&lt;/maximum&gt;
+        &lt;center&gt;28&lt;/center&gt;
+      &lt;/kspace_encoding_step_1&gt;
+      &lt;kspace_encoding_step_2&gt;
+        &lt;minimum&gt;0&lt;/minimum&gt;
+        &lt;maximum&gt;45&lt;/maximum&gt;
+        &lt;center&gt;20&lt;/center&gt;
+      &lt;/kspace_encoding_step_2&gt;
+      &lt;slice&gt;
+        &lt;minimum&gt;0&lt;/minimum&gt;
+        &lt;maximum&gt;0&lt;/maximum&gt;
+        &lt;center&gt;0&lt;/center&gt;
+      &lt;/slice&gt;
+      &lt;set&gt;
+        &lt;minimum&gt;0&lt;/minimum&gt;
+        &lt;maximum&gt;0&lt;/maximum&gt;
+        &lt;center&gt;0&lt;/center&gt;
+      &lt;/set&gt;
+    &lt;/encodingLimits&gt;
+  &lt;/encoding&gt;
+  &lt;parallelImaging&gt;
+    &lt;accelerationFactor&gt;
+      &lt;kspace_encoding_step_1&gt;1&lt;/kspace_encoding_step_1&gt;
+      &lt;kspace_encoding_step_2&gt;1&lt;/kspace_encoding_step_2&gt;
+    &lt;/accelerationFactor&gt;
+    &lt;calibrationMode&gt;other&lt;/calibrationMode&gt;
+  &lt;/parallelImaging&gt;
+  &lt;sequenceParameters&gt;
+    &lt;TR&gt;4.6&lt;/TR&gt;
+    &lt;TE&gt;2.35&lt;/TE&gt;
+    &lt;TI&gt;300&lt;/TI&gt;
+  &lt;/sequenceParameters&gt;
+&lt;/ismrmrdHeader&gt;
+</pre></div>
+</div>
+<p>The most critical elements for image reconstruction are contained in the <tt class="docutils literal"><span class="pre">&lt;encoding&gt;</span></tt> section of the document, which describes the encoded spaced and also the target reconstructed space. Along with the <tt class="docutils literal"><span class="pre">&lt;encodingLimits&gt;</span></tt> this section allows the reconstruction program to determine matrix sizes, oversampling factors, partial Fourier, etc. In the example above, data is acquired with two-fold oversampling in the read-out (<tt class="docutils literal"><span class="pre">x</span></tt>) direction, which is reflected in the larger matrix size in the encoded space compared to the reconstruction space. The field of view is also twice as large in the encoded space. For the first phase encoding dimension (<tt class="docutils literal"><span class="pre">y</span></tt>), we have a combination of oversampling (20%), reduced phase resolution (only 83 lines of k-space acquired, and partial Fourier sampling, which is reflected in the asymmetric center of the encoding limits of the <tt class="docutils literal"><span class="pre">&lt;kspace_encoding_step_1&gt;</span></tt>. Specifically, the data lines would be placed into the encoding space like this:</p>
+<div class="highlight-python"><div class="highlight"><pre>0                                     70                                         139
+|-------------------------------------|-------------------------------------------|
+                      ****************************************************
+                      ^               ^                                  ^
+                      0              28                                  83
+</pre></div>
+</div>
+<p>After FFT, only the central 116 lines are kept, i.e. there is a reduced field of view in the phase encoding direction. Center and encoding limits for the readout dimension is not given in the XML header. This is to accommodate sequences where the center of the readout may change from readout to readout (alternating directions of readout). There is a field on the individual data headers (see below) to indicate the center of the readout.</p>
+<p>An experiment can have multiple encoding spaces and it is possible to indicate on each acquired data readout, which encoding space the data belongs to (see below).</p>
+<p>In addition to the defined field in the xml header, it is possible to add an arbitrary number of user defined parameters to accommodate special sequence parameters. Please consult the xml <a class="reference internal" href="#schema">schema</a> to see how user parameters are defined. Briefly, the XML header can have a section at the end which looks like:</p>
+<div class="code xml highlight-python"><div class="highlight"><pre>&lt;userParameters&gt;
+  &lt;userParameterLong&gt;
+    &lt;name&gt;MyVar1&lt;/name&gt;&lt;value&gt;1003&lt;/value&gt;
+  &lt;/userParameterLong&gt;
+  &lt;userParameterLong&gt;
+    &lt;name&gt;MyVar2&lt;/name&gt;&lt;value&gt;1999&lt;/value&gt;
+  &lt;/userParameterLong&gt;
+  &lt;userParameterDouble&gt;
+    &lt;name&gt;MyDoubleVar&lt;/name&gt;&lt;value&gt;87.6676&lt;/value&gt;
+  &lt;/userParameterDouble&gt;
+&lt;/userParameters&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="fixed-data-structures">
+<h3><a class="toc-backref" href="#id11">Fixed Data structures</a><a class="headerlink" href="#fixed-data-structures" title="Permalink to this headline">¶</a></h3>
+<p>Each raw data acquisition is preceded by the following fixed layout structure:</p>
+<div class="highlight-python"><div class="highlight"><pre>    uint16_t version;                                    /**&lt; First unsigned int indicates the version */
+    uint64_t flags;                                      /**&lt; bit field with flags */
+    uint32_t measurement_uid;                            /**&lt; Unique ID for the measurement */
+    uint32_t scan_counter;                               /**&lt; Current acquisition number in the measurement */
+    uint32_t acquisition_time_stamp;                     /**&lt; Acquisition clock */
+    uint32_t physiology_time_stamp[ISMRMRD_PHYS_STAMPS]; /**&lt; Physiology time stamps, e.g. ecg, breating, etc. */
+    uint16_t number_of_samples;                          /**&lt; Number of samples acquired */
+    uint16_t available_channels;                         /**&lt; Available coils */
+    uint16_t active_channels;                            /**&lt; Active coils on current acquisiton */
+    uint64_t channel_mask[ISMRMRD_CHANNEL_MASKS];        /**&lt; Mask to indicate which channels are active. Support for 1024 channels */
+    uint16_t discard_pre;                                /**&lt; Samples to be discarded at the beginning of  acquisition */
+    uint16_t discard_post;                               /**&lt; Samples to be discarded at the end of acquisition */
+    uint16_t center_sample;                              /**&lt; Sample at the center of k-space */
+    uint16_t encoding_space_ref;                         /**&lt; Reference to an encoding space, typically only one per acquisition */
+    uint16_t trajectory_dimensions;                      /**&lt; Indicates the dimensionality of the trajectory vector (0 means no trajectory) */
+    float sample_time_us;                                /**&lt; Time between samples in micro seconds, sampling BW */
+    float position[3];                                   /**&lt; Three-dimensional spatial offsets from isocenter */
+    float read_dir[3];                                   /**&lt; Directional cosines of the readout/frequency encoding */
+    float phase_dir[3];                                  /**&lt; Directional cosines of the phase */
+    float slice_dir[3];                                  /**&lt; Directional cosines of the slice direction */
+    float patient_table_position[3];                     /**&lt; Patient table off-center */
+    ISMRMRD_EncodingCounters idx;                        /**&lt; Encoding loop counters, see above */
+    int32_t user_int[ISMRMRD_USER_INTS];                 /**&lt; Free user parameters */
+    float user_float[ISMRMRD_USER_FLOATS];               /**&lt; Free user parameters */
+</pre></div>
+</div>
+<p>Where EncodingCounters are defined as:</p>
+<div class="highlight-python"><div class="highlight"><pre>    uint16_t kspace_encode_step_1;    /**&lt; e.g. phase encoding line number */
+    uint16_t kspace_encode_step_2;    /**&lt; e.g. partition encoding number */
+    uint16_t average;                 /**&lt; e.g. signal average number */
+    uint16_t slice;                   /**&lt; e.g. imaging slice number */
+    uint16_t contrast;                /**&lt; e.g. echo number in multi-echo */
+    uint16_t phase;                   /**&lt; e.g. cardiac phase number */
+    uint16_t repetition;              /**&lt; e.g. dynamic number for dynamic scanning */
+    uint16_t set;                     /**&lt; e.g. flow encoding set */
+    uint16_t segment;                 /**&lt; e.g. segment number for segmented acquisition */
+    uint16_t user[ISMRMRD_USER_INTS]; /**&lt; Free user parameters */
+</pre></div>
+</div>
+<p>The interpretation of some of these fields may vary from sequence to sequence, i.e. for a Cartesian sequence, <tt class="docutils literal"><span class="pre">kspace_encode_step_1</span></tt> would be the phase encoding step, for a spiral sequence where phase encoding direction does not make sense, it would be the spiral interleave number. The <tt class="docutils literal"><span class="pre">encoding_space_ref</span></tt> enables the user to tie an acquisition to a specific encoding space (see above) in case there are multiple, e.g. in situations where a calibration scan may be integrated in the acquisition.</p>
+<p>The flags field is a bit mask, which in principle can be used freely by the user, but suggested flag values are given in <tt class="docutils literal"><span class="pre">ismrmrd.h</span></tt>, it is recommended not to use already designated flag bits for custom purposes. There are a set of bits reserved for prototyping (bits 57-64), please see <tt class="docutils literal"><span class="pre">ismrmrd.h</span></tt> for details.</p>
+<p>The header contains a <tt class="docutils literal"><span class="pre">trajectory_dimensions</span></tt> field. If the value of this field is larger than 0, it means that trajectories are stored with each individual acquisition. For a 2D acquisition, the <tt class="docutils literal"><span class="pre">trajectory_dimensions</span></tt> would typically be 2 and the convention (for memory layout) is that the header is followed immediately by the trajectory before the complex data. There is an example of how this memory layout could be implemented with a C++ class in the <tt class="docutils literal"><span class="pre">ismrmrd.h</span></tt> file:</p>
+<div class="code c++ highlight-python"><div class="highlight"><pre>class Acquisition
+{
+
+//....
+
+AcquisitionHeader head_; //Header, see above
+
+float* traj_;            //Trajectory, elements = head_.trajectory_dimensions*head_.number_of_samples
+                         //   [kx,ky,kx,ky.....]        (for head_.trajectory_dimensions = 2)
+                         //   [kx,ky,kz,kx,ky,kz,.....] (for head_.trajectory_dimensions = 3)
+
+float* data_;            //Actual data, elements = head_.number_of_samples*head_.active_channels*2
+                         //   [re,im,re,im,.....,re,im,re,im,.....,re,im,re,im,.....]
+                         //    ---channel 1-------channel 2---------channel 3-----
+
+};
+</pre></div>
+</div>
+<p>This suggested memory layout is only a suggestion. The HDF5 interface (see below) can be used to read the data into many different data structures. In fact, the user can choose to read only part of the header or not read the data, etc.</p>
+<p>As mentioned above, the ISMRMRD format also suggests a way to store reconstructed images (or maybe image data used for calibration). An <tt class="docutils literal"><span class="pre">ImageHeader</span></tt> structure is defined in <tt class="docutils literal"><span class="pre">ismrmrd.h</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre>    uint16_t version;                                    /**&lt; First unsigned int indicates the version */
+    uint16_t data_type;                                  /**&lt; e.g. unsigned short, float, complex float, etc. */
+    uint64_t flags;                                      /**&lt; bit field with flags */
+    uint32_t measurement_uid;                            /**&lt; Unique ID for the measurement  */
+    uint16_t matrix_size[3];                             /**&lt; Pixels in the 3 spatial dimensions */
+    float field_of_view[3];                              /**&lt; Size (in mm) of the 3 spatial dimensions */
+    uint16_t channels;                                   /**&lt; Number of receive channels */
+    float position[3];                                   /**&lt; Three-dimensional spatial offsets from isocenter */
+    float read_dir[3];                                   /**&lt; Directional cosines of the readout/frequency encoding */
+    float phase_dir[3];                                  /**&lt; Directional cosines of the phase */
+    float slice_dir[3];                                  /**&lt; Directional cosines of the slice direction */
+    float patient_table_position[3];                     /**&lt; Patient table off-center */
+    uint16_t average;                                    /**&lt; e.g. signal average number */
+    uint16_t slice;                                      /**&lt; e.g. imaging slice number */
+    uint16_t contrast;                                   /**&lt; e.g. echo number in multi-echo */
+    uint16_t phase;                                      /**&lt; e.g. cardiac phase number */
+    uint16_t repetition;                                 /**&lt; e.g. dynamic number for dynamic scanning */
+    uint16_t set;                                        /**&lt; e.g. flow encodning set */
+    uint32_t acquisition_time_stamp;                     /**&lt; Acquisition clock */
+    uint32_t physiology_time_stamp[ISMRMRD_PHYS_STAMPS]; /**&lt; Physiology time stamps, e.g. ecg, breathing, etc. */
+    uint16_t image_type;                                 /**&lt; e.g. magnitude, phase, complex, real, imag, etc. */
+    uint16_t image_index;                                /**&lt; e.g. image number in series of images  */
+    uint16_t image_series_index;                         /**&lt; e.g. series number */
+    int32_t user_int[ISMRMRD_USER_INTS];                 /**&lt; Free user parameters */
+    float user_float[ISMRMRD_USER_FLOATS];               /**&lt; Free user parameters */
+    uint32_t attribute_string_len;                       /**&lt; Length of attributes string */
+</pre></div>
+</div>
+<p>In a similar fashion to the raw data acquisition data, the intention is to store a header followed by the image data. Since image data can be in several different format (e.g. float, complex, etc.), the memory layout is less well defined but can be described as:</p>
+<div class="code c++ highlight-python"><div class="highlight"><pre>template &lt;typename T&gt; class Image {
+
+ImageHeader head_;     //ImageHeader as defined above
+T* data_;              //Data, array of size (matrix_size[0]*matrix_size[1]*matrix_size[2]*channels),
+                       //first spatial dimension is fastest changing array index, channels outer most (slowest changing).
+};
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="file-storage">
+<h2><a class="toc-backref" href="#id12">File Storage</a><a class="headerlink" href="#file-storage" title="Permalink to this headline">¶</a></h2>
+<p>The ISMRM Raw Data format is stored in HDF5 format. Details on this format can be found at the <a class="reference external" href="http://www.hdfgroup.org/HDF5/">HDF5</a> website. Briefly it is a hierarchical data format (much like a file system), which can contain multiple variable organized in groups (like folders in a file system). The variables can contain arrays of data values, custom defined structs, or simple text fields. It is the convention (but not a requirement) that the ISMRMRD datasets are stored in a group called <tt class="docutils literal"><span class="pre">/dataset</span></tt>. The XML configuration is stored in the variable <tt class="docutils literal"><span class="pre">/dataset/xml</span></tt> and the data is stored in <tt class="docutils literal"><span class="pre">/dataset/data</span></tt>. HDF5 files can be viewed with the HDFView application which is available on the HDF5 website for multiple platforms. Files can also be read directly in Matlab, in fact Matlab uses (since file format v7.3) HDF5 as its internal data format in the <tt class="docutils literal"><span class="pre">.mat</span></tt> files. As an example the data from an ISMRMRD file with name <tt class="docutils literal"><span class="pre">myfile.h5</span></tt> can be read in matlab with a command like:</p>
+<div class="code matlab highlight-python"><div class="highlight"><pre>&gt;&gt; data = h5read(&#39;simple_gre.h5&#39;, &#39;/dataset/data&#39;);
+&gt;&gt; data
+
+data =
+
+head: [1x1 struct]
+traj: {1x1281 cell}
+data: {1x1281 cell}
+
+ &gt;&gt; data.head
+
+ ans =
+
+                version: [1x1281 uint16]
+                  flags: [1x1281 uint64]
+        measurement_uid: [1x1281 uint32]
+           scan_counter: [1x1281 uint32]
+ acquisition_time_stamp: [1x1281 uint32]
+  physiology_time_stamp: [3x1281 uint32]
+      number_of_samples: [1x1281 uint16]
+     available_channels: [1x1281 uint16]
+        active_channels: [1x1281 uint16]
+           channel_mask: [16x1281 uint64]
+            discard_pre: [1x1281 uint16]
+           discard_post: [1x1281 uint16]
+          center_sample: [1x1281 uint16]
+     encoding_space_ref: [1x1281 uint16]
+  trajectory_dimensions: [1x1281 uint16]
+         sample_time_us: [1x1281 single]
+               position: [3x1281 single]
+               read_dir: [3x1281 single]
+              phase_dir: [3x1281 single]
+              slice_dir: [3x1281 single]
+ patient_table_position: [3x1281 single]
+                    idx: [1x1 struct]
+               user_int: [8x1281 int32]
+             user_float: [8x1281 single]
+
+ &gt;&gt;
+</pre></div>
+</div>
+<p>The HDF5 file format can be access from C, C++, and java using the libraries provided on the HDF5 website. The ISMRMRD distribution also comes with some C++ wrappers that can be used for easy access (read and write) from C++ programs. See below.</p>
+<p>In addition to storing acquisition data and images as defined by the headers above, the HDF5 format also enables storage of generic multi-dimensional arrays. The ISMRMRD format does not explicitly define how such data should be stored, but leaves it open for the user to add variables and data as dictated by a given application.</p>
+</div>
+<div class="section" id="c-support-library">
+<h2><a class="toc-backref" href="#id13">C++ Support Library</a><a class="headerlink" href="#c-support-library" title="Permalink to this headline">¶</a></h2>
+<p>To enable easy prototyping of C++ software using the ISMRMRD data format, a simple C++ wrapper class is provided (defined in <tt class="docutils literal"><span class="pre">dataset.h</span></tt>):</p>
+<div class="highlight-python"><div class="highlight"><pre>class EXPORTISMRMRD Dataset {
+public:
+    // Constructor and destructor
+    Dataset(const char* filename, const char* groupname, bool create_file_if_needed = true);
+    ~Dataset();
+    
+    // Methods
+    // XML Header
+    void writeHeader(const std::string &amp;xmlstring);
+    void readHeader(std::string&amp; xmlstring);
+    // Acquisitions
+    void appendAcquisition(const Acquisition &amp;acq);
+    void readAcquisition(uint32_t index, Acquisition &amp;acq);
+    uint32_t getNumberOfAcquisitions();
+    // Images
+    template &lt;typename T&gt; void appendImage(const std::string &amp;var, const Image&lt;T&gt; &amp;im);
+    void appendImage(const std::string &amp;var, const ISMRMRD_Image *im);
+    template &lt;typename T&gt; void readImage(const std::string &amp;var, uint32_t index, Image&lt;T&gt; &amp;im);
+    uint32_t getNumberOfImages(const std::string &amp;var);
+    // NDArrays
+    template &lt;typename T&gt; void appendNDArray(const std::string &amp;var, const NDArray&lt;T&gt; &amp;arr);
+    void appendNDArray(const std::string &amp;var, const ISMRMRD_NDArray *arr);
+    template &lt;typename T&gt; void readNDArray(const std::string &amp;var, uint32_t index, NDArray&lt;T&gt; &amp;arr);
+    uint32_t getNumberOfNDArrays(const std::string &amp;var);
+
+protected:
+    ISMRMRD_Dataset dset_;
+</pre></div>
+</div>
+<p>Using this wrapper, C++ applications can be programmed as:</p>
+<div class="code c++ highlight-python"><div class="highlight"><pre>// Open dataset
+ISMRMRD::Dataset d(datafile.c_str(), &quot;dataset&quot;, false);
+
+std::string xml;
+d.readHeader(xml);
+ISMRMRD::IsmrmrdHeader hdr;
+ISMRMRD::deserialize(xml.c_str(),hdr);
+
+// Do something with the header
+
+unsigned int number_of_acquisitions = d.getNumberOfAcquisitions();
+ISMRMRD::Acquisition acq;
+for (unsigned int i = 0; i &lt; number_of_acquisitions; i++) {
+    // Read one acquisition at a time
+    d.readAcquisition(i, acq);
+
+    // Do something with the data
+}
+</pre></div>
+</div>
+<p>Since the XML header is defined in the <tt class="docutils literal"><span class="pre">schema/ismrmrd.xsd</span></tt> file, it can be
+parsed with numerous xml parsing libraries. The ISMRMRD library includes an API
+that allows for programmatically deserializing, manipulating, and serializing the
+XML header. See the code in the <tt class="docutils literal"><span class="pre">utilities</span></tt> directory for examples of how to
+use the XML API.</p>
+<div class="section" id="c-example-applications">
+<h3><a class="toc-backref" href="#id14">C++ Example Applications</a><a class="headerlink" href="#c-example-applications" title="Permalink to this headline">¶</a></h3>
+<p>The distribution includes two example applications, one that creates a simple 2D single-channel dataset from scratch and one that reconstructs this dataset (you need FFTW installed to compile these test applications). The data generation application looks like this (<tt class="docutils literal"><span class="pre">generate_cartesian_shepp_logan.cpp</span></tt>):</p>
+<div class="highlight-python"><div class="highlight"><pre>int main(int argc, char** argv)
+{
+	/** TODO
+	 *
+	 *  Noise samples
+	 *  Acceleration
+	 *  k-space coordinates
+	 *
+	 */
+
+	unsigned int matrix_size; //Matrix size
+	unsigned int ncoils;      //Number of coils
+	unsigned int ros;           //Readout ovesampling
+	unsigned int repetitions;
+	unsigned int acc_factor;
+	float noise_level;
+	std::string outfile;
+	std::string dataset;
+	bool store_coordinates;
+	bool noise_calibration;
+
+	po::options_description desc(&quot;Allowed options&quot;);
+	desc.add_options()
+	    (&quot;help,h&quot;, &quot;produce help message&quot;)
+	    (&quot;matrix,m&quot;, po::value&lt;unsigned int&gt;(&amp;matrix_size)-&gt;default_value(256), &quot;Matrix Size&quot;)
+	    (&quot;coils,c&quot;, po::value&lt;unsigned int&gt;(&amp;ncoils)-&gt;default_value(8), &quot;Number of Coils&quot;)
+	    (&quot;oversampling,O&quot;, po::value&lt;unsigned int&gt;(&amp;ros)-&gt;default_value(2), &quot;Readout oversampling&quot;)
+	    (&quot;repetitions,r&quot;, po::value&lt;unsigned int&gt;(&amp;repetitions)-&gt;default_value(1), &quot;Repetitions&quot;)
+	    (&quot;acceleration,a&quot;, po::value&lt;unsigned int&gt;(&amp;acc_factor)-&gt;default_value(1), &quot;Acceleration factor&quot;)
+	    (&quot;noise-level,n&quot;, po::value&lt;float&gt;(&amp;noise_level)-&gt;default_value(0.05f,&quot;0.05&quot;), &quot;Noise Level&quot;)
+	    (&quot;output,o&quot;, po::value&lt;std::string&gt;(&amp;outfile)-&gt;default_value(&quot;testdata.h5&quot;), &quot;Output File Name&quot;)
+	    (&quot;dataset,d&quot;, po::value&lt;std::string&gt;(&amp;dataset)-&gt;default_value(&quot;dataset&quot;), &quot;Output Dataset Name&quot;)
+	    (&quot;noise-calibration,C&quot;, po::value&lt;bool&gt;(&amp;noise_calibration)-&gt;zero_tokens(), &quot;Add noise calibration&quot;)
+	    (&quot;k-coordinates,k&quot;,  po::value&lt;bool&gt;(&amp;store_coordinates)-&gt;zero_tokens(), &quot;Store k-space coordinates&quot;)
+	;
+
+	po::variables_map vm;
+	po::store(po::parse_command_line(argc, argv, desc), vm);
+	po::notify(vm);
+
+	if (vm.count(&quot;help&quot;)) {
+	    std::cout &lt;&lt; desc &lt;&lt; &quot;\n&quot;;
+	    return 1;
+	}
+
+	std::cout &lt;&lt; &quot;Generating Cartesian Shepp Logan Phantom!!!&quot; &lt;&lt; std::endl;
+	std::cout &lt;&lt; &quot;Acceleration: &quot; &lt;&lt; acc_factor &lt;&lt; std::endl;
+
+	boost::shared_ptr&lt;NDArray&lt;complex_float_t&gt; &gt; phantom = shepp_logan_phantom(matrix_size);
+	boost::shared_ptr&lt;NDArray&lt;complex_float_t&gt; &gt; coils = generate_birdcage_sensititivies(matrix_size, ncoils, 1.5);
+
+	std::vector&lt;size_t&gt; dims;
+	dims.push_back(matrix_size*ros); //oversampling in the readout direction
+	dims.push_back(matrix_size);
+	dims.push_back(ncoils);
+
+	NDArray&lt;complex_float_t&gt; coil_images(dims);
+	memset(coil_images.getDataPtr(), 0, coil_images.getDataSize());
+
+	for (unsigned int c = 0; c &lt; ncoils; c++) {
+            for (unsigned int y = 0; y &lt; matrix_size; y++) {
+                for (unsigned int x = 0; x &lt; matrix_size; x++) {
+                    uint16_t xout = x + (matrix_size*ros-matrix_size)/2;
+                    coil_images(xout,y,c) = (*phantom)(x,y) * (*coils)(x,y,c);
+                }
+            }
+	}
+
+        //Let&#39;s append the data to the file
+        //Create if needed
+	Dataset d(outfile.c_str(),dataset.c_str(), true);
+	Acquisition acq;
+        size_t readout = matrix_size*ros;
+        
+	if (noise_calibration)
+        {
+            acq.resize(readout, ncoils);
+            memset((void *)acq.getDataPtr(), 0, acq.getDataSize());
+            acq.setFlag(ISMRMRD_ACQ_IS_NOISE_MEASUREMENT);
+            add_noise(acq,noise_level);
+            acq.sample_time_us() = 5.0;
+            d.appendAcquisition(acq);
+	}
+        
+        if (store_coordinates) {
+            acq.resize(readout, ncoils, 2);
+        }
+        else {
+            acq.resize(readout, ncoils);
+        }
+        memset((void*)acq.getDataPtr(), 0, acq.getDataSize());
+        
+        acq.available_channels() = ncoils;
+	acq.center_sample() = (readout&gt;&gt;1);
+
+
+        for (unsigned int r = 0; r &lt; repetitions; r++) {
+            for (unsigned int a = 0; a &lt; acc_factor; a++) {
+                NDArray&lt;complex_float_t&gt; cm = coil_images;
+                fft2c(cm);
+
+                add_noise(cm,noise_level);
+                for (size_t i = a; i &lt; matrix_size; i+=acc_factor) {
+                    acq.clearAllFlags();
+                    
+                    //Set some flags
+                    if (i == a) {
+                        acq.setFlag(ISMRMRD_ACQ_FIRST_IN_SLICE);
+                    }
+                    if (i &gt;= (matrix_size-acc_factor)) {
+                        acq.setFlag(ISMRMRD_ACQ_LAST_IN_SLICE);
+                    }
+                    acq.idx().kspace_encode_step_1 = i;
+                    acq.idx().repetition = r*acc_factor + a;
+                    acq.sample_time_us() = 5.0;
+                    for (size_t c = 0; c &lt; ncoils; c++) {
+                        for (size_t s = 0; s &lt; readout; s++) {
+                            acq.data(s,c) = cm(s,i,c);
+                        }
+                    }
+                    
+                    if (store_coordinates) {
+                        float ky = (1.0*i-(matrix_size&gt;&gt;1))/(1.0*matrix_size);
+                        for (size_t x = 0; x &lt; readout; x++) {
+                            float kx = (1.0*x-(readout&gt;&gt;1))/(1.0*readout);
+                            acq.traj(0,x) = kx;
+                            acq.traj(1,x) = ky;
+                        }
+                    }
+                    d.appendAcquisition(acq);
+                }
+            }
+	}
+
+	//Let&#39;s create a header, we will use the C++ classes in ismrmrd/xml.h
+	IsmrmrdHeader h;
+        h.version = ISMRMRD_XMLHDR_VERSION;
+	h.experimentalConditions.H1resonanceFrequency_Hz = 63500000; //~1.5T        
+
+	AcquisitionSystemInformation sys;
+	sys.institutionName = &quot;ISMRM Synthetic Imaging Lab&quot;;
+	sys.receiverChannels = ncoils;
+	h.acquisitionSystemInformation = sys;
+
+	//Create an encoding section
+        Encoding e;
+        e.encodedSpace.matrixSize.x = readout;
+        e.encodedSpace.matrixSize.y = matrix_size;
+        e.encodedSpace.matrixSize.z = 1;
+        e.encodedSpace.fieldOfView_mm.x = 600;
+        e.encodedSpace.fieldOfView_mm.y = 300;
+        e.encodedSpace.fieldOfView_mm.z = 6;
+        e.reconSpace.matrixSize.x = readout/2;
+        e.reconSpace.matrixSize.y = matrix_size;
+        e.reconSpace.matrixSize.z = 1;
+        e.reconSpace.fieldOfView_mm.x = 300;
+        e.reconSpace.fieldOfView_mm.y = 300;
+        e.reconSpace.fieldOfView_mm.z = 6;
+        e.trajectory = &quot;cartesian&quot;;
+        e.encodingLimits.kspace_encoding_step_1 = Limit(0, matrix_size-1,(matrix_size&gt;&gt;1));
+        e.encodingLimits.repetition = Limit(0, repetitions*acc_factor,0);
+        
+	//e.g. parallel imaging
+	if (acc_factor &gt; 1) {
+            ParallelImaging parallel;
+            parallel.accelerationFactor.kspace_encoding_step_1 = acc_factor;
+            parallel.accelerationFactor.kspace_encoding_step_2 = 1;
+            parallel.calibrationMode = &quot;interleaved&quot;;
+            e.parallelImaging = parallel;
+	}
+
+	//Add the encoding section to the header
+	h.encoding.push_back(e);
+
+	//Add any additional fields that you may want would go here....
+
+	//Serialize the header
+        std::stringstream str;
+        ISMRMRD::serialize( h, str);
+        std::string xml_header = str.str();
+        //std::cout &lt;&lt; xml_header &lt;&lt; std::endl;
+        
+	//Write the header to the data file.
+	d.writeHeader(xml_header);
+
+        //Write out some arrays for convenience
+        d.appendNDArray(&quot;phantom&quot;, *phantom);
+        d.appendNDArray(&quot;csm&quot;, *coils);
+        d.appendNDArray(&quot;coil_images&quot;, coil_images);
+        
+	return 0;
+}
+</pre></div>
+</div>
+<p>To reconstruct this synthetic dataset, you can use the test reconstruction application (<tt class="docutils literal"><span class="pre">recon_cartesian_2d.cpp</span></tt>):</p>
+<div class="highlight-python"><div class="highlight"><pre>int main(int argc, char** argv)
+{
+    if (argc &lt; 2) {
+        print_usage(argv[0]);
+        return -1;
+    }
+
+    std::string datafile(argv[1]);
+
+    std::cout &lt;&lt; &quot;Simple ISMRMRD Reconstruction program&quot; &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;   - filename: &quot; &lt;&lt; datafile &lt;&lt; std::endl;
+
+    //Let&#39;s open the existing dataset
+    ISMRMRD::Dataset d(datafile.c_str(),&quot;dataset&quot;, false);
+
+    std::string xml;
+    d.readHeader(xml);
+    ISMRMRD::IsmrmrdHeader hdr;
+    ISMRMRD::deserialize(xml.c_str(),hdr);
+
+    //Let&#39;s print some information from the header
+    if (hdr.version) {
+        std::cout &lt;&lt; &quot;XML Header version: &quot; &lt;&lt; hdr.version &lt;&lt; std::endl;
+    }
+    else {
+        std::cout &lt;&lt; &quot;XML Header unspecified version.&quot; &lt;&lt; std::endl;
+    }
+    
+    if (hdr.encoding.size() != 1) {
+        std::cout &lt;&lt; &quot;Number of encoding spaces: &quot; &lt;&lt; hdr.encoding.size() &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;This simple reconstruction application only supports one encoding space&quot; &lt;&lt; std::endl;
+        return -1;
+    }
+
+    ISMRMRD::EncodingSpace e_space = hdr.encoding[0].encodedSpace;
+    ISMRMRD::EncodingSpace r_space = hdr.encoding[0].reconSpace;
+
+    std::cout &lt;&lt; &quot;Encoding Matrix Size        : [&quot; &lt;&lt; e_space.matrixSize.x &lt;&lt; &quot;, &quot; &lt;&lt; e_space.matrixSize.y &lt;&lt; &quot;, &quot; &lt;&lt; e_space.matrixSize.z &lt;&lt; &quot;]&quot; &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;Reconstruction Matrix Size  : [&quot; &lt;&lt; r_space.matrixSize.x &lt;&lt; &quot;, &quot; &lt;&lt; r_space.matrixSize.y &lt;&lt; &quot;, &quot; &lt;&lt; r_space.matrixSize.z &lt;&lt; &quot;]&quot; &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;Number of acquisitions      : &quot; &lt;&lt; d.getNumberOfAcquisitions() &lt;&lt; std::endl;
+
+    if (e_space.matrixSize.z != 1) {
+        std::cout &lt;&lt; &quot;This simple reconstruction application only supports 2D encoding spaces&quot; &lt;&lt; std::endl;
+        return -1;
+    }
+
+    //Allocate a buffer for the data
+    std::vector&lt;size_t&gt; dims;
+    dims.push_back(e_space.matrixSize.x);
+    dims.push_back(e_space.matrixSize.y);
+    ISMRMRD::NDArray&lt;complex_float_t&gt; buffer(dims);
+    
+    //Now loop through and copy data
+    unsigned int number_of_acquisitions = d.getNumberOfAcquisitions();
+    ISMRMRD::Acquisition acq;
+    for (unsigned int i = 0; i &lt; number_of_acquisitions; i++) {
+        //Read one acquisition at a time
+        d.readAcquisition(i, acq);
+
+        //Copy data, we should probably be more careful here and do more tests....
+        //We are not considering multiple channels here.
+        unsigned int offset = acq.idx().kspace_encode_step_1*dims[0];
+        memcpy(&amp;buffer.getDataPtr()[offset], acq.getDataPtr(),sizeof(complex_float_t)*dims[0]);
+    }
+
+    //Let&#39;s FFT the k-space to image
+    fftwf_complex* tmp = (fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex)*buffer.getNumberOfElements());
+
+    if (!tmp) {
+        std::cout &lt;&lt; &quot;Error allocating temporary storage for FFTW&quot; &lt;&lt; std::endl;
+        return -1;
+    }
+
+    //FFTSHIFT
+    fftshift(reinterpret_cast&lt;complex_float_t*&gt;(tmp), buffer.getDataPtr(), dims[0], dims[1]);
+
+    //Create the FFTW plan
+    fftwf_plan p = fftwf_plan_dft_2d(dims[1], dims[0], tmp ,tmp, FFTW_BACKWARD, FFTW_ESTIMATE);
+
+    //Execute the FFT
+    fftwf_execute(p);
+
+    //FFTSHIFT
+    fftshift( buffer.getDataPtr(), reinterpret_cast&lt;std::complex&lt;float&gt;*&gt;(tmp), dims[0], dims[1]);
+
+    //Clean up.
+    fftwf_destroy_plan(p);
+    fftwf_free(tmp);
+
+    //Allocate an image
+    ISMRMRD::Image&lt;float&gt; img_out(r_space.matrixSize.x, r_space.matrixSize.y, 1, 1);
+
+    //f there is oversampling in the readout direction remove it
+    //Take the magnitude
+    size_t offset = ((e_space.matrixSize.x - r_space.matrixSize.x)&gt;&gt;1);
+    for (unsigned int y = 0; y &lt; r_space.matrixSize.y; y++) {
+        for (unsigned int x = 0; x &lt; r_space.matrixSize.x; x++) {
+            img_out(x,y) = std::abs(buffer(x+offset, y));
+        }
+    }
+    
+    // The following are extra guidance we can put in the image header
+    img_out.setImageType(ISMRMRD::ISMRMRD_IMTYPE_MAGNITUDE);
+    img_out.setSlice(0);
+    img_out.setFieldOfView(r_space.fieldOfView_mm.x, r_space.fieldOfView_mm.y, r_space.fieldOfView_mm.z);
+    //And so on
+    
+    //Let&#39;s write the reconstructed image into the same data file
+    d.appendImage(&quot;myimage&quot;, img_out);
+
+    return 0;
+}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="matlab-example-code-and-datasets">
+<h2><a class="toc-backref" href="#id15">Matlab Example Code and Datasets</a><a class="headerlink" href="#matlab-example-code-and-datasets" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">examples</span></tt> folder contains some matlab code to illustrate simple interaction with the ISMRMRD data format. The examples use test data sets, wich can be downloaded from the Github <a class="reference external" href="https://github.com/ismrmrd/ismrmrd">website</a>. Go to the <tt class="docutils literal"><span class="pre">examples/data</span></tt> folder and type the following to download the data:</p>
+<div class="highlight-python"><div class="highlight"><pre>wget https://sourceforge.net/projects/ismrmrd/files/data/3D_partial_fourier.h5
+wget https://sourceforge.net/projects/ismrmrd/files/data/simple_gre.h5
+wget https://sourceforge.net/projects/ismrmrd/files/data/simple_spiral.h5
+</pre></div>
+</div>
+<p>For instance, to reconstruct a 2D Cartesian acquisition (10 image repetitions), type (from the <tt class="docutils literal"><span class="pre">examples/matlab</span></tt> folder):</p>
+<div class="code matlab highlight-python"><div class="highlight"><pre>&gt;&gt; images = simple_cartesian_recon(&#39;../data/simple_gre.h5&#39;);
+Reconstructing image 1....done
+Reconstructing image 2....done
+Reconstructing image 3....done
+Reconstructing image 4....done
+Reconstructing image 5....done
+Reconstructing image 6....done
+Reconstructing image 7....done
+Reconstructing image 8....done
+Reconstructing image 9....done
+Reconstructing image 10....done
+&gt;&gt;
+</pre></div>
+</div>
+<p>You should see one of the reconstructed images display. An example is also given of a 3D acquisition with partial Fourier, phase and slice oversampling, etc. Reconstruct this dataset with:</p>
+<div class="code matlab highlight-python"><div class="highlight"><pre>&gt;&gt; images = simple_cartesian_recon(&#39;../data/3D_partial_fourier.h5&#39;);
+Reconstructing image 1....done
+</pre></div>
+</div>
+<p>The center slice of the volume should be displayed at the end of the reconstruction.</p>
+<p>Finally, there is also a spiral dataset. This dataset illustrates how the flexible section of the <tt class="docutils literal"><span class="pre">&lt;trajectoryDescription&gt;</span></tt> can be used to add user defined parameters and an identifier to describe the trajectory. This dataset is also an example of storing the trajectory with the data for direct reconstruction. Reconstruct this dataset with:</p>
+<div class="code matlab highlight-python"><div class="highlight"><pre>&gt;&gt; images = simple_spiral_recon(&#39;../data/simple_spiral.h5&#39;);
+Reconstructing image 1....done
+Reconstructing image 2....done
+Reconstructing image 3....done
+Reconstructing image 4....done
+Reconstructing image 5....done
+Reconstructing image 6....done
+Reconstructing image 7....done
+Reconstructing image 8....done
+Reconstructing image 9....done
+Reconstructing image 10....done
+&gt;&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="appendix">
+<h2><a class="toc-backref" href="#id16">Appendix</a><a class="headerlink" href="#appendix" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="xml-schema-definition">
+<h3><a class="toc-backref" href="#id17">XML Schema Definition</a><a class="headerlink" href="#xml-schema-definition" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python" id="schema"><div class="highlight"><pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;
+&lt;xs:schema xmlns=&quot;http://www.ismrm.org/ISMRMRD&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; elementFormDefault=&quot;qualified&quot; targetNamespace=&quot;http://www.ismrm.org/ISMRMRD&quot; version=&quot;1&quot;&gt;
+
+    &lt;xs:element name=&quot;ismrmrdHeader&quot; type=&quot;ismrmrdHeader&quot;/&gt;
+
+    &lt;xs:complexType name=&quot;ismrmrdHeader&quot;&gt;
+      &lt;xs:sequence&gt;
+        &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;version&quot; type=&quot;xs:long&quot;/&gt;
+        &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;subjectInformation&quot; type=&quot;subjectInformationType&quot;/&gt;
+        &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;studyInformation&quot; type=&quot;studyInformationType&quot;/&gt;
+        &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;measurementInformation&quot; type=&quot;measurementInformationType&quot;/&gt;
+        &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;acquisitionSystemInformation&quot; type=&quot;acquisitionSystemInformationType&quot;/&gt;
+        &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; name=&quot;experimentalConditions&quot; type=&quot;experimentalConditionsType&quot;/&gt;
+        &lt;xs:element maxOccurs=&quot;unbounded&quot; minOccurs=&quot;1&quot; name=&quot;encoding&quot; type=&quot;encoding&quot;/&gt;
+        &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;sequenceParameters&quot; type=&quot;sequenceParametersType&quot;/&gt;
+        &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;userParameters&quot; type=&quot;userParameters&quot;/&gt;
+      &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name=&quot;subjectInformationType&quot;&gt;
+    &lt;xs:all&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;patientName&quot; type=&quot;xs:string&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;patientWeight_kg&quot; type=&quot;xs:float&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;patientID&quot; type=&quot;xs:string&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;patientBirthdate&quot; type=&quot;xs:date&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;patientGender&quot;&gt;
+        &lt;xs:simpleType&gt;
+          &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+            &lt;xs:pattern value=&quot;[MFO]&quot;/&gt;
+          &lt;/xs:restriction&gt;
+        &lt;/xs:simpleType&gt;
+      &lt;/xs:element&gt;
+    &lt;/xs:all&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name=&quot;studyInformationType&quot;&gt;
+    &lt;xs:all&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot; name=&quot;studyDate&quot; type=&quot;xs:date&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot; name=&quot;studyTime&quot; type=&quot;xs:time&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot; name=&quot;studyID&quot; type=&quot;xs:string&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot; name=&quot;accessionNumber&quot; type=&quot;xs:long&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot; name=&quot;referringPhysicianName&quot; type=&quot;xs:string&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot; name=&quot;studyDescription&quot; type=&quot;xs:string&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot; name=&quot;studyInstanceUID&quot; type=&quot;xs:string&quot;/&gt;
+    &lt;/xs:all&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name=&quot;measurementInformationType&quot;&gt;
+    &lt;xs:sequence&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;measurementID&quot; type=&quot;xs:string&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;seriesDate&quot; type=&quot;xs:date&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;seriesTime&quot; type=&quot;xs:time&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;1&quot; name=&quot;patientPosition&quot;&gt;
+        &lt;xs:simpleType&gt;
+          &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+            &lt;xs:enumeration value=&quot;HFP&quot;/&gt;
+            &lt;xs:enumeration value=&quot;HFS&quot;/&gt;
+            &lt;xs:enumeration value=&quot;HFDR&quot;/&gt;
+            &lt;xs:enumeration value=&quot;HFDL&quot;/&gt;
+            &lt;xs:enumeration value=&quot;FFP&quot;/&gt;
+            &lt;xs:enumeration value=&quot;FFS&quot;/&gt;
+            &lt;xs:enumeration value=&quot;FFDR&quot;/&gt;
+            &lt;xs:enumeration value=&quot;FFDL&quot;/&gt;
+          &lt;/xs:restriction&gt;
+        &lt;/xs:simpleType&gt;
+      &lt;/xs:element&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;initialSeriesNumber&quot; type=&quot;xs:long&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;protocolName&quot; type=&quot;xs:string&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;seriesDescription&quot; type=&quot;xs:string&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;unbounded&quot; minOccurs=&quot;0&quot; name=&quot;measurementDependency&quot; type=&quot;measurementDependencyType&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;seriesInstanceUIDRoot&quot; type=&quot;xs:string&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;frameOfReferenceUID&quot; type=&quot;xs:string&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;referencedImageSequence&quot; type=&quot;referencedImageSequence&quot;/&gt;
+    &lt;/xs:sequence&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name=&quot;measurementDependencyType&quot;&gt;
+    &lt;xs:sequence&gt;
+        &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; name=&quot;dependencyType&quot; type=&quot;xs:string&quot;/&gt;
+        &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; name=&quot;measurementID&quot; type=&quot;xs:string&quot;/&gt;
+    &lt;/xs:sequence&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name=&quot;acquisitionSystemInformationType&quot;&gt;
+    &lt;xs:all&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;systemVendor&quot; type=&quot;xs:string&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;systemModel&quot; type=&quot;xs:string&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;systemFieldStrength_T&quot; type=&quot;xs:float&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;relativeReceiverNoiseBandwidth&quot; type=&quot;xs:float&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;receiverChannels&quot; type=&quot;xs:unsignedShort&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;institutionName&quot; type=&quot;xs:string&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; name=&quot;stationName&quot; type=&quot;xs:string&quot;/&gt;
+    &lt;/xs:all&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name=&quot;experimentalConditionsType&quot;&gt;
+    &lt;xs:all&gt;
+      &lt;xs:element name=&quot;H1resonanceFrequency_Hz&quot; type=&quot;xs:long&quot;/&gt;
+    &lt;/xs:all&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name=&quot;encoding&quot;&gt;
+    &lt;xs:all&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; name=&quot;encodedSpace&quot; type=&quot;encodingSpaceType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; name=&quot;reconSpace&quot; type=&quot;encodingSpaceType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; name=&quot;encodingLimits&quot; type=&quot;encodingLimitsType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; name=&quot;trajectory&quot; type=&quot;trajectoryType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;trajectoryDescription&quot; type=&quot;trajectoryDescriptionType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;parallelImaging&quot; type=&quot;parallelImagingType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;echoTrainLength&quot; type=&quot;xs:long&quot;/&gt;
+    &lt;/xs:all&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name=&quot;encodingSpaceType&quot;&gt;
+    &lt;xs:all&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; name=&quot;matrixSize&quot; type=&quot;matrixSize&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; name=&quot;fieldOfView_mm&quot; type=&quot;fieldOfView_mm&quot;/&gt;
+    &lt;/xs:all&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name=&quot;matrixSize&quot;&gt;
+    &lt;xs:sequence&gt;
+      &lt;xs:element default=&quot;1&quot; maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; name=&quot;x&quot; type=&quot;xs:unsignedShort&quot;/&gt;
+      &lt;xs:element default=&quot;1&quot; maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; name=&quot;y&quot; type=&quot;xs:unsignedShort&quot;/&gt;
+      &lt;xs:element default=&quot;1&quot; maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; name=&quot;z&quot; type=&quot;xs:unsignedShort&quot;/&gt;
+    &lt;/xs:sequence&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name=&quot;fieldOfView_mm&quot;&gt;
+    &lt;xs:sequence&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; name=&quot;x&quot; type=&quot;xs:float&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; name=&quot;y&quot; type=&quot;xs:float&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; name=&quot;z&quot; type=&quot;xs:float&quot;/&gt;
+    &lt;/xs:sequence&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name=&quot;limitType&quot;&gt;
+    &lt;xs:all&gt;
+      &lt;xs:element default=&quot;0&quot; name=&quot;minimum&quot; type=&quot;xs:unsignedShort&quot;/&gt;
+      &lt;xs:element default=&quot;0&quot; name=&quot;maximum&quot; type=&quot;xs:unsignedShort&quot;/&gt;
+      &lt;xs:element default=&quot;0&quot; name=&quot;center&quot; type=&quot;xs:unsignedShort&quot;/&gt;
+    &lt;/xs:all&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name=&quot;encodingLimitsType&quot;&gt;
+    &lt;xs:all&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;kspace_encoding_step_0&quot; type=&quot;limitType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;kspace_encoding_step_1&quot; type=&quot;limitType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;kspace_encoding_step_2&quot; type=&quot;limitType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;average&quot; type=&quot;limitType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;slice&quot; type=&quot;limitType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;contrast&quot; type=&quot;limitType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;phase&quot; type=&quot;limitType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;repetition&quot; type=&quot;limitType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;set&quot; type=&quot;limitType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;segment&quot; type=&quot;limitType&quot;/&gt;
+    &lt;/xs:all&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:simpleType name=&quot;trajectoryType&quot;&gt;
+    &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+      &lt;xs:enumeration value=&quot;cartesian&quot;/&gt;
+      &lt;xs:enumeration value=&quot;epi&quot;/&gt;
+      &lt;xs:enumeration value=&quot;radial&quot;/&gt;
+      &lt;xs:enumeration value=&quot;goldenangle&quot;/&gt;
+      &lt;xs:enumeration value=&quot;spiral&quot;/&gt;
+      &lt;xs:enumeration value=&quot;other&quot;/&gt;
+    &lt;/xs:restriction&gt;
+  &lt;/xs:simpleType&gt;
+
+  &lt;xs:complexType name=&quot;trajectoryDescriptionType&quot;&gt;
+    &lt;xs:sequence&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; name=&quot;identifier&quot; type=&quot;xs:string&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;unbounded&quot; minOccurs=&quot;0&quot; name=&quot;userParameterLong&quot; type=&quot;userParameterLongType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;unbounded&quot; minOccurs=&quot;0&quot; name=&quot;userParameterDouble&quot; type=&quot;userParameterDoubleType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; name=&quot;comment&quot; type=&quot;xs:string&quot;/&gt;
+    &lt;/xs:sequence&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name=&quot;sequenceParametersType&quot;&gt;
+    &lt;xs:sequence&gt;
+      &lt;xs:element minOccurs=&quot;1&quot; maxOccurs=&quot;unbounded&quot; type=&quot;xs:float&quot; name=&quot;TR&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;1&quot; maxOccurs=&quot;unbounded&quot; type=&quot;xs:float&quot; name=&quot;TE&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot; type=&quot;xs:float&quot; name=&quot;TI&quot;/&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot; type=&quot;xs:float&quot; name=&quot;flipAngle_deg&quot;/&gt;
+
+    &lt;/xs:sequence&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name=&quot;userParameterLongType&quot;&gt;
+    &lt;xs:all&gt;
+      &lt;xs:element name=&quot;name&quot; type=&quot;xs:string&quot;/&gt;
+      &lt;xs:element name=&quot;value&quot; type=&quot;xs:long&quot;/&gt;
+    &lt;/xs:all&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name=&quot;userParameterDoubleType&quot;&gt;
+    &lt;xs:all&gt;
+      &lt;xs:element name=&quot;name&quot; type=&quot;xs:string&quot;/&gt;
+      &lt;xs:element name=&quot;value&quot; type=&quot;xs:double&quot;/&gt;
+    &lt;/xs:all&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name=&quot;userParameterStringType&quot;&gt;
+    &lt;xs:all&gt;
+      &lt;xs:element name=&quot;name&quot; type=&quot;xs:string&quot;/&gt;
+      &lt;xs:element name=&quot;value&quot; type=&quot;xs:string&quot;/&gt;
+    &lt;/xs:all&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name=&quot;userParameterBase64Type&quot;&gt;
+    &lt;xs:all&gt;
+      &lt;xs:element name=&quot;name&quot; type=&quot;xs:string&quot;/&gt;
+      &lt;xs:element name=&quot;value&quot; type=&quot;xs:base64Binary&quot;/&gt;
+    &lt;/xs:all&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name=&quot;referencedImageSequence&quot;&gt;
+    &lt;xs:sequence&gt;
+      &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot; name=&quot;referencedSOPInstanceUID&quot; type=&quot;xs:string&quot;/&gt;
+    &lt;/xs:sequence&gt;
+  &lt;/xs:complexType&gt;
+      
+  &lt;xs:complexType name=&quot;userParameters&quot;&gt;
+    &lt;xs:sequence&gt;
+      &lt;xs:element maxOccurs=&quot;unbounded&quot; minOccurs=&quot;0&quot; name=&quot;userParameterLong&quot; type=&quot;userParameterLongType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;unbounded&quot; minOccurs=&quot;0&quot; name=&quot;userParameterDouble&quot; type=&quot;userParameterDoubleType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;unbounded&quot; minOccurs=&quot;0&quot; name=&quot;userParameterString&quot; type=&quot;userParameterStringType&quot;/&gt;
+      &lt;xs:element maxOccurs=&quot;unbounded&quot; minOccurs=&quot;0&quot; name=&quot;userParameterBase64&quot; type=&quot;userParameterBase64Type&quot;/&gt;
+    &lt;/xs:sequence&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:complexType name=&quot;accelerationFactorType&quot;&gt;
+    &lt;xs:all&gt;
+      &lt;xs:element name=&quot;kspace_encoding_step_1&quot; type=&quot;xs:unsignedShort&quot;/&gt;
+      &lt;xs:element name=&quot;kspace_encoding_step_2&quot; type=&quot;xs:unsignedShort&quot;/&gt;
+    &lt;/xs:all&gt;
+  &lt;/xs:complexType&gt;
+
+  &lt;xs:simpleType name=&quot;calibrationModeType&quot;&gt;
+    &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+      &lt;xs:enumeration value=&quot;embedded&quot;/&gt;
+      &lt;xs:enumeration value=&quot;interleaved&quot;/&gt;
+      &lt;xs:enumeration value=&quot;separate&quot;/&gt;
+      &lt;xs:enumeration value=&quot;external&quot;/&gt;
+      &lt;xs:enumeration value=&quot;other&quot;/&gt;
+    &lt;/xs:restriction&gt;
+  &lt;/xs:simpleType&gt;
+
+  &lt;xs:simpleType name=&quot;interleavingDimensionType&quot;&gt;
+    &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+      &lt;xs:enumeration value=&quot;phase&quot;/&gt;
+      &lt;xs:enumeration value=&quot;repetition&quot;/&gt;
+      &lt;xs:enumeration value=&quot;contrast&quot;/&gt;
+      &lt;xs:enumeration value=&quot;average&quot;/&gt;
+      &lt;xs:enumeration value=&quot;other&quot;/&gt;
+    &lt;/xs:restriction&gt;
+  &lt;/xs:simpleType&gt;
+
+  &lt;xs:complexType name=&quot;parallelImagingType&quot;&gt;
+  	&lt;xs:sequence&gt;
+  	 &lt;xs:element type=&quot;accelerationFactorType&quot; name=&quot;accelerationFactor&quot;/&gt;
+  	 &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; type=&quot;calibrationModeType&quot; name=&quot;calibrationMode&quot;/&gt;
+  	 &lt;xs:element maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; type=&quot;interleavingDimensionType&quot; name=&quot;interleavingDimension&quot;/&gt;
+  	&lt;/xs:sequence&gt;
+  &lt;/xs:complexType&gt;
+&lt;/xs:schema&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h2><a class="toc-backref" href="#id18">Indices and tables</a><a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, ISMRMRD Developers.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
