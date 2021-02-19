@@ -55,8 +55,8 @@ echo "Documentation not up to date for this version. Will update..."
 mkdir -p $docsfolder
 rm -rf $docsfolder/*
 
-
-#TODO: Install dependencies if needed
+#Install dependencies if needed
+sudo apt-get -y install doxygen git-core graphviz libhdf5-serial-dev
 
 mkdir -p build
 cd build
