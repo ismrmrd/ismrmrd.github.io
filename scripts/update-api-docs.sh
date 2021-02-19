@@ -64,5 +64,8 @@ cmake ../
 cmake --build . --target doc
 cp -r doc/html/api/* $docsfolder/
 
+# Update index.html (if needed)
+${SCRIPTPATH}/update-index-html.sh apidocs/${ISMRMRD_VERSION_STRING}
+
 # Tag it with the latest SHA1
 echo $ISMRMRD_SHA1 >> $docsfolder/ismrmrd-hash

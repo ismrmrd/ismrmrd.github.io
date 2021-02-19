@@ -1,9 +1,0 @@
-var searchData=
-[
-  ['parallelimaging',['ParallelImaging',['../struct_i_s_m_r_m_r_d_1_1_parallel_imaging.html',1,'ISMRMRD']]],
-  ['patient_5ftable_5fposition',['patient_table_position',['../struct_i_s_m_r_m_r_d_1_1_i_s_m_r_m_r_d___acquisition_header.html#ac60deebf8de6233052d2684610e86865',1,'ISMRMRD::ISMRMRD_AcquisitionHeader::patient_table_position()'],['../struct_i_s_m_r_m_r_d_1_1_i_s_m_r_m_r_d___image_header.html#a340df893111dceba68bdf3f7ceb7a3e3',1,'ISMRMRD::ISMRMRD_ImageHeader::patient_table_position()']]],
-  ['phase',['phase',['../struct_i_s_m_r_m_r_d_1_1_i_s_m_r_m_r_d___encoding_counters.html#a6ca144e82386cd5f238e183d50b6d70a',1,'ISMRMRD::ISMRMRD_EncodingCounters::phase()'],['../struct_i_s_m_r_m_r_d_1_1_i_s_m_r_m_r_d___image_header.html#a171f95ea56a2b4fee20a463df29f80a4',1,'ISMRMRD::ISMRMRD_ImageHeader::phase()']]],
-  ['phase_5fdir',['phase_dir',['../struct_i_s_m_r_m_r_d_1_1_i_s_m_r_m_r_d___acquisition_header.html#a261508e7f64f127f929e29cb3e7c388e',1,'ISMRMRD::ISMRMRD_AcquisitionHeader::phase_dir()'],['../struct_i_s_m_r_m_r_d_1_1_i_s_m_r_m_r_d___image_header.html#a42c87ea1f74cd2c21f7b02df18889756',1,'ISMRMRD::ISMRMRD_ImageHeader::phase_dir()']]],
-  ['physiology_5ftime_5fstamp',['physiology_time_stamp',['../struct_i_s_m_r_m_r_d_1_1_i_s_m_r_m_r_d___acquisition_header.html#a00d885a96d1ea47abd4440a7a57c3518',1,'ISMRMRD::ISMRMRD_AcquisitionHeader::physiology_time_stamp()'],['../struct_i_s_m_r_m_r_d_1_1_i_s_m_r_m_r_d___image_header.html#a1d89d2ecc0cb2ffbe99647592431d82d',1,'ISMRMRD::ISMRMRD_ImageHeader::physiology_time_stamp()']]],
-  ['position',['position',['../struct_i_s_m_r_m_r_d_1_1_i_s_m_r_m_r_d___acquisition_header.html#ab32bbc5cd41605eeddaf5fc3f27e7b9b',1,'ISMRMRD::ISMRMRD_AcquisitionHeader::position()'],['../struct_i_s_m_r_m_r_d_1_1_i_s_m_r_m_r_d___image_header.html#a48a93a4f92ebb3ffaf63e25e0cf858bb',1,'ISMRMRD::ISMRMRD_ImageHeader::position()']]]
-];
