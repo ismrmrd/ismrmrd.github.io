@@ -7,7 +7,7 @@ SCRIPTPATH=`dirname $SCRIPT`
 cat > $SCRIPTPATH/../index.html<< EOF
 <html>
   <head>
-    <meta http-equiv="refresh" content="0;url=http://ismrmrd.github.io/${folder}" />
+    <meta http-equiv="refresh" content="0;url=https://ismrmrd.github.io/${folder}" />
     <title></title>
   </head>
  <body></body>
