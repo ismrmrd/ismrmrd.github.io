@@ -1,0 +1,20 @@
+name: Build API docs
+on:
+  repository_dispatch:
+    types: build-api-docs
+    
+  workflow_dispatch:
+
+#  schedule:
+#    - cron:  '*/5 * * * *'
+
+jobs:
+  build:
+    name: apidocs-build
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: EchoInformation
+        run: 'echo "Triggered event text: ${{ github.event.client_payload.text }}"'
