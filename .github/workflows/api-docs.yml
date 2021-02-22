@@ -5,18 +5,18 @@ on:
     
   workflow_dispatch:
 
-#  schedule:
-#    - cron:  '*/5 * * * *'
+  schedule:
+    # Running 4 times a day
+    - cron:  '0 */6 * * *'
 
 jobs:
   build:
     name: apidocs-build
     runs-on: ubuntu-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: EchoInformation
+      - name: Build Documentation
         run: ./scripts/update-api-docs.sh 
 
       - name: Create Pull Request
